@@ -1,0 +1,16 @@
+require 'mysql2'
+ 
+client = Mysql2::Client.new(
+    :host     => '127.0.0.1', # 主机
+    :username => 'root',      # 用户名
+    :password => 'mysql',    # 密码
+    :database => 'fams',      # 数据库
+    :encoding => 'utf8'       # 编码
+)
+ 
+client.query("insert into dog(name) values('哈士奇')")
+result = client.query("Select * from dog")
+ 
+result.each do |item|
+  puts "In row :#{item['id']} the dog's name is :#{item['name']}"
+end
